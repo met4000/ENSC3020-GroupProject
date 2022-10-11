@@ -3,5 +3,5 @@
     "port": "COM3",
     "programmer": "arduino:avrispmkii",
     "configuration": "cpu=atmega328old",
-    "sketch": "gps_test\\gps_test.ino"
+    "sketch": "motor_test\\motor_test.ino"
 }

@@ -1,20 +1,27 @@
 #include <AFMotor.h>
 
 AF_DCMotor motor(1);
+AF_DCMotor steering(4);
 
 void setup() {
 	motor.setSpeed(255);
-	motor.run(FORWARD);
-
-	pinMode(13, OUTPUT);
+	steering.setSpeed(255);
 }
 
-bool v = false;
+int n = 500;
 
 void loop() {
-	motor.run(v ? FORWARD : BACKWARD);
-	// motor.run(FORWARD);
+	steering.run(FORWARD);
 
-	digitalWrite(13, v = !v);
-	delay(200);
+	motor.run(FORWARD);
+	delay(n);
+	motor.run(BACKWARD);
+	delay(n);
+
+	steering.run(BACKWARD);
+
+	motor.run(FORWARD);
+	delay(n);
+	motor.run(BACKWARD);
+	delay(n);
 }
