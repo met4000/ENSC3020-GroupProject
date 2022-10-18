@@ -3,5 +3,5 @@
     "port": "COM3",
     "programmer": "arduino:avrispmkii",
     "configuration": "cpu=atmega328old",
-    "sketch": "both_drive\\both_drive.ino"
+    "sketch": "drive_to\\drive_to.ino"
 }
