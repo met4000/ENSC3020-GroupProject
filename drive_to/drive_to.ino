@@ -12,12 +12,13 @@ SoftwareSerial ss(3, 2);
 
 
 // parameters
-float cone_lat = -31.979427, cone_lon = 115.817939;
-float target_distance_threshold = 10;
+float cone_lat = -31.9799241, cone_lon = 115.8182423;
+float target_distance_threshold = 2.5;
 
 float kp = 10;
-float min_err = 15;
-float gps_cycle_delay = 3500, max_turn_delay = 1000;
+float min_err = 12;
+float gps_cycle_delay = 3500, max_turn_delay = 1100;
+float drive_speed = 255 - (90 * 0.75); // depends on battery level
 
 
 static void smart_delay(unsigned long ms);
@@ -38,9 +39,9 @@ void setup() {
     Serial.begin(9600);
     Serial.println("Startup...");
 #endif
-    delay(5000); // can remove if too slow
+    delay(1000); // can remove if too slow
 
-    drive.setSpeed(255);
+    drive.setSpeed(drive_speed);
     steering.setSpeed(255);
 
     pinMode(LED_BUILTIN, OUTPUT);
@@ -121,7 +122,7 @@ void loop() {
 #endif
 
     absErr = fabs(err);
-    if (absErr > min_err) {
+    if (absErr > (distance < target_distance_threshold * 5 ? min_err / 3 : min_err)) {
         turn_delay = fmin(absErr * kp, max_turn_delay);
 #if DEBUG
         Serial.print("\tturn_delay: ");
