@@ -13,7 +13,7 @@ SoftwareSerial ss(3, 2);
 
 // parameters
 float cone_lat = -31.979427, cone_lon = 115.817939;
-float threshold = 15;
+float target_distance_threshold = 10;
 
 float kp = 10;
 float min_err = 15;
@@ -93,7 +93,7 @@ void loop() {
     Serial.print(bearing);
 #endif
 
-    if (distance < threshold) {
+    if (distance < target_distance_threshold) {
         // approx. at target
         drive.run(RELEASE);
 
